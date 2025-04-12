@@ -1,0 +1,2163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>pyNMRGui</class>
+ <widget class="QMainWindow" name="pyNMRGui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1931</width>
+    <height>1532</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PyNMR</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Y:/MeasurementService/Python simulation and analysis code/pyNMRms/icons/Professor.ico</normaloff>Y:/MeasurementService/Python simulation and analysis code/pyNMRms/icons/Professor.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="1">
+     <widget class="QFrame" name="frame_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1750</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Light">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Midlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>239</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Dark">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Mid">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>149</red>
+            <green>169</green>
+            <blue>170</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="BrightText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Shadow">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>239</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>220</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Light">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Midlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>239</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Dark">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Mid">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>149</red>
+            <green>169</green>
+            <blue>170</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="BrightText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Shadow">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>239</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>220</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Light">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Midlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>239</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Dark">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Mid">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>149</red>
+            <green>169</green>
+            <blue>170</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="BrightText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>112</red>
+            <green>127</green>
+            <blue>127</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Shadow">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>224</red>
+            <green>254</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>220</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ToolTipText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::WinPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="pbResetData">
+           <property name="text">
+            <string>Reset data</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbClearData">
+           <property name="toolTip">
+            <string>Clears plots when new data is loaded</string>
+           </property>
+           <property name="text">
+            <string>Clear old data on Open </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_29">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>NMR Data File</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lblFileName"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
+         </property>
+         <property name="horizontalSpacing">
+          <number>10</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>5</number>
+         </property>
+         <item row="0" column="21">
+          <widget class="QPushButton" name="pbPhase">
+           <property name="toolTip">
+            <string>Adjusts the phase of all spectra by finding the maximum of the biggest peak and setting the imaginary part to zero</string>
+           </property>
+           <property name="text">
+            <string>Auto phase all</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="4">
+          <widget class="QLabel" name="label_33">
+           <property name="text">
+            <string>Diffusion model</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="19">
+          <widget class="QComboBox" name="cbIntegrationRange">
+           <property name="toolTip">
+            <string>Option to integrate real part of the spectra over a set number of linewidths or a set bandwidth</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Integrate n linewidths</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Integrate fixed bandwidth</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="label_6">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Freq (MHz)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Sample</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lenPoints">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>First index in 4D data array (np, ns, nr, nu)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="8">
+          <widget class="QLineEdit" name="leRFamplitude">
+           <property name="toolTip">
+            <string>RF amplitude used to fit nutation data</string>
+           </property>
+           <property name="text">
+            <string>435</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="12">
+          <widget class="QLineEdit" name="leNutationStart">
+           <property name="toolTip">
+            <string>Start time of nutation experiment</string>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="8">
+          <widget class="QLineEdit" name="leRFCoilTaper">
+           <property name="text">
+            <string>5.5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>repeats(-1=all)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="8">
+          <widget class="QLineEdit" name="leRFTXDelay">
+           <property name="text">
+            <string>5.0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="5">
+          <widget class="QComboBox" name="cbPulseSequence">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>FID</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>IR</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>nutation</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>CPMG</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>SE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Diffusion</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>PD</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>T1rho</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HP</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string># of spectra</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_2">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>B0(T)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="11">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;nutation start (µs)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>RF Amp (µT)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QSpinBox" name="sbViewCurveN">
+           <property name="toolTip">
+            <string>Sets which spectra are displayed -1 = all spectra</string>
+           </property>
+           <property name="minimum">
+            <number>-1</number>
+           </property>
+           <property name="value">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="12">
+          <widget class="QLineEdit" name="leTauCPMG">
+           <property name="toolTip">
+            <string>CPMG delay between excitation and refocussing pulses</string>
+           </property>
+           <property name="text">
+            <string>1.0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lenTD3">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Third index in 4D data array (np, ns, nr, nu)</string>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string># of repeats</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="leSample"/>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="lbGamma">
+           <property name="text">
+            <string>plot type</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="11">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;t&lt;span style=&quot; vertical-align:sub;&quot;&gt;180&lt;/span&gt;(µs)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QLineEdit" name="leTemperature">
+           <property name="toolTip">
+            <string>sample temperature for reference, taken from file name or comment</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Number of points in the data set, either time or frequency domain</string>
+           </property>
+           <property name="text">
+            <string># of points</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="9">
+          <widget class="QLabel" name="label_27">
+           <property name="text">
+            <string>Gradient direction</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="8">
+          <widget class="QLineEdit" name="let90">
+           <property name="toolTip">
+            <string>time durations for 90 degree pulse</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="lblF0">
+           <property name="toolTip">
+            <string>Resonant frequency</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::WinPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLineEdit" name="leField">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="19">
+          <widget class="QPushButton" name="pbSubtractBaseLines">
+           <property name="toolTip">
+            <string>Subtracts background determined from last 5% of the data</string>
+           </property>
+           <property name="text">
+            <string>Subtract BG</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="10">
+          <widget class="QLineEdit" name="leGradCal">
+           <property name="toolTip">
+            <string>Current gradient calibration</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="9">
+          <widget class="QLabel" name="label_24">
+           <property name="text">
+            <string>Grad(ms)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QComboBox" name="cbDataType">
+           <property name="toolTip">
+            <string>Changes horizontal axis to time, frequency, ppm or index</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>FID (s)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Spectra (index)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Spectra (Hz)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Spectra (ppm)</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="3" column="9">
+          <widget class="QLabel" name="label_28">
+           <property name="text">
+            <string>Imax(A)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="12">
+          <widget class="QLineEdit" name="leT180">
+           <property name="toolTip">
+            <string>duration of 180 degree refocussing pulse</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QSpinBox" name="sbRepeat">
+           <property name="toolTip">
+            <string>Set which data set repeats are displayed -1=all data</string>
+           </property>
+           <property name="minimum">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="15" alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="12">
+          <widget class="QLineEdit" name="leNutationIncrement">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="11">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;nutation increment (µs) &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Pulse Seq</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="20">
+          <widget class="QPushButton" name="pbFFT">
+           <property name="text">
+            <string>FFT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="10">
+          <widget class="QLineEdit" name="leGradPW">
+           <property name="toolTip">
+            <string>Gradient Duration (ms)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>Phase adjust(deg)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>lastdelay(ms)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="10">
+          <widget class="QComboBox" name="cbGradOrientation">
+           <item>
+            <property name="text">
+             <string>X</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Z</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLabel" name="label_21">
+           <property name="text">
+            <string>Temp(C)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>spectra(-1=all)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="10">
+          <widget class="QLineEdit" name="leImax"/>
+         </item>
+         <item row="5" column="10">
+          <widget class="QLineEdit" name="lePGSEdelta">
+           <property name="toolTip">
+            <string>Delay between gradinet and 180 RF pulse (ms)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="11">
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Symbol';&quot;&gt;t&lt;/span&gt;&lt;span style=&quot; vertical-align:sub;&quot;&gt;CPMG&lt;/span&gt;(ms)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lenSpectra">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777187</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Second index in 4D data array (np, ns, nr, nu)</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>20</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1" colspan="2">
+          <widget class="QSlider" name="hsPhase">
+           <property name="toolTip">
+            <string>PhaseSlider</string>
+           </property>
+           <property name="whatsThis">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Phase Slider&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="minimum">
+            <number>-1800</number>
+           </property>
+           <property name="maximum">
+            <number>1800</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="sliderPosition">
+            <number>0</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksAbove</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>RF coil taper (mm)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="6">
+          <widget class="QLabel" name="label_23">
+           <property name="text">
+            <string>RFtx delay(µs)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="6">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;t90 (µs)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="19">
+          <widget class="QPushButton" name="pbFindIntWidth">
+           <property name="toolTip">
+            <string>Calculates start/stop indicies for integration</string>
+           </property>
+           <property name="text">
+            <string>Find Int width</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QLineEdit" name="lePhase">
+           <property name="toolTip">
+            <string>Phase(deg)</string>
+           </property>
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="5">
+          <widget class="QLineEdit" name="leLastDelay"/>
+         </item>
+         <item row="1" column="9">
+          <widget class="QLabel" name="label_26">
+           <property name="statusTip">
+            <string>Gradient calibration factor currenlty being applied</string>
+           </property>
+           <property name="text">
+            <string>Grad cal (mT/m/A)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QLineEdit" name="leFreqShift">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="8">
+          <widget class="QLineEdit" name="leECCX">
+           <property name="toolTip">
+            <string>Eddy Current correction applied to diffusion data in X-direction</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="20">
+          <widget class="QPushButton" name="pbPlotFIDMax">
+           <property name="text">
+            <string>Plot Signal Max</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="10">
+          <widget class="QLineEdit" name="leGradRisetime"/>
+         </item>
+         <item row="6" column="9">
+          <widget class="QLabel" name="label_30">
+           <property name="text">
+            <string>Grad risetime(ms)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QRadioButton" name="rbPhaseAll">
+           <property name="text">
+            <string>Phase All</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="6">
+          <widget class="QLabel" name="label_32">
+           <property name="toolTip">
+            <string>Eddy Current correction applied to diffusion data in Y-direction</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;EC Y Cor(10&lt;span style=&quot; vertical-align:super;&quot;&gt;-3&lt;/span&gt;mm&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;/s)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="19">
+          <widget class="QPushButton" name="pbIntegrate">
+           <property name="toolTip">
+            <string>Integrates Real Part of data and plots</string>
+           </property>
+           <property name="text">
+            <string>Integrate</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="6">
+          <widget class="QLabel" name="label_31">
+           <property name="toolTip">
+            <string>Eddy Current correction applied to diffusion data in X-direction</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;EC X Cor(10&lt;span style=&quot; vertical-align:super;&quot;&gt;-3&lt;/span&gt;mm&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;/s)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QRadioButton" name="rbPhaseSelected">
+           <property name="text">
+            <string>Phase Selected</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QPushButton" name="pgFreqShift">
+           <property name="text">
+            <string>Freq Shift (Hz)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="9">
+          <widget class="QLabel" name="label_25">
+           <property name="text">
+            <string>delta(ms)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="8">
+          <widget class="QLineEdit" name="leECCY">
+           <property name="toolTip">
+            <string>Eddy Current correction applied to diffusion data in Y-direction</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="4">
+          <widget class="QLabel" name="label_34">
+           <property name="text">
+            <string>T2 model</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="5">
+          <widget class="QComboBox" name="cbDiffusionModel">
+           <item>
+            <property name="text">
+             <string>Simple exponential</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Kurtosis</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Bi-exponential</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="6" column="5">
+          <widget class="QComboBox" name="comboBox_2">
+           <item>
+            <property name="text">
+             <string>Simple exponential</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Bi-exponential</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="20">
+          <widget class="QLabel" name="label_36">
+           <property name="text">
+            <string>BW (Hz)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="21">
+          <widget class="QLineEdit" name="leIntBW">
+           <property name="toolTip">
+            <string>Sets bandwidth for integration </string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="21">
+          <widget class="QLineEdit" name="lenPW50">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Number FWHMs to integrate over</string>
+           </property>
+           <property name="text">
+            <string>10</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="20">
+          <widget class="QLabel" name="label_35">
+           <property name="text">
+            <string># of linewidths</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="11">
+          <widget class="QLabel" name="label_10">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>iStart, iStop</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="11">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>fStart, fStop, df (Hz)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="12">
+          <widget class="QLineEdit" name="leiStart">
+           <property name="toolTip">
+            <string>Start index for integration</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="12">
+          <widget class="QLineEdit" name="leFstart"/>
+         </item>
+         <item row="5" column="19">
+          <widget class="QLineEdit" name="lejStop">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>stop index for integration</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="19">
+          <widget class="QLineEdit" name="leFstop"/>
+         </item>
+         <item row="6" column="20">
+          <widget class="QCheckBox" name="chECCCal">
+           <property name="toolTip">
+            <string>If checked will open ECC (Eddy Current Correction)files and make ECC </string>
+           </property>
+           <property name="text">
+            <string>ECC Cal on</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="21">
+          <widget class="QCheckBox" name="chGradCal">
+           <property name="toolTip">
+            <string>If checked will perform Gradient Calibrations and Eddy Current Corrections</string>
+           </property>
+           <property name="text">
+            <string>GradCal on</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="21">
+          <widget class="QCheckBox" name="cbDoNotFitBelowSNR">
+           <property name="toolTip">
+            <string>Will not fit diffusion, T2 for points with signal below SNR level</string>
+           </property>
+           <property name="text">
+            <string>Do Not fit &lt; SNR</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="20">
+          <widget class="QLabel" name="label_37">
+           <property name="text">
+            <string>SNR</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="21">
+          <widget class="QLineEdit" name="leSNR">
+           <property name="toolTip">
+            <string>Signal to noise ratio(SNR) of system and present scan</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="PlotWidget" name="gvReal">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>340</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1750</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Plot of real part of FID or spectra</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::WinPanel</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PlotWidget" name="gvImag">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>340</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Plot of imaginary part of FID or spectra</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::WinPanel</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QTextEdit" name="txtMessages">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777213</height>
+       </size>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoAll</set>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="tabStopWidth">
+       <number>160</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1931</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionOpenDataFile"/>
+    <addaction name="actionSaveData"/>
+    <addaction name="actionClear_Plots"/>
+    <addaction name="actionSave_Messages"/>
+    <addaction name="actionImport"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionEnter_TI_list"/>
+    <addaction name="actionEnter_CPMG_list"/>
+    <addaction name="actionPlot_B1_z"/>
+    <addaction name="actionView2d"/>
+    <addaction name="action3dViewer"/>
+    <addaction name="actionShow_TNT_header"/>
+    <addaction name="actionChange_Plot_Background"/>
+    <addaction name="actionToggle_Plot_Background"/>
+    <addaction name="actionShow_Crosshairs"/>
+   </widget>
+   <widget class="QMenu" name="menuMake_Data">
+    <property name="title">
+     <string>MakeData</string>
+    </property>
+    <addaction name="actionMake_T1IR_data"/>
+    <addaction name="actionMake_Diffusion_data"/>
+    <addaction name="actionShowDataWindow"/>
+   </widget>
+   <widget class="QMenu" name="menuReport">
+    <property name="title">
+     <string>Report</string>
+    </property>
+    <addaction name="actionAdd_plots_to_report"/>
+    <addaction name="actionSave_Report"/>
+    <addaction name="actionClear_Report"/>
+   </widget>
+   <widget class="QMenu" name="menuUncertainty">
+    <property name="title">
+     <string>Uncertainty</string>
+    </property>
+    <addaction name="actionUncertainty_Calculation"/>
+   </widget>
+   <widget class="QMenu" name="menuData">
+    <property name="title">
+     <string>Data</string>
+    </property>
+    <addaction name="actionReset_data"/>
+    <addaction name="actionCalculate_Baselines"/>
+    <addaction name="actionFit_Lorentzians"/>
+    <addaction name="actionDelete_current_repeat"/>
+    <addaction name="actionInvert_data"/>
+    <addaction name="actionPlot_RI_or_AP"/>
+    <addaction name="actionPrint_PD_Data"/>
+    <addaction name="actionRemove_leading_trailing_points"/>
+    <addaction name="actionSubtract_reference_curve"/>
+   </widget>
+   <widget class="QMenu" name="menuDiffusion">
+    <property name="title">
+     <string>Diffusion</string>
+    </property>
+    <addaction name="actionGradientCalibrationXY"/>
+    <addaction name="actionDiffusionAnalysis"/>
+    <addaction name="actionInput_Gradient_current_traces"/>
+    <addaction name="actionCalculate_Image_Widths"/>
+    <addaction name="actionInput_eddycurrent_correction"/>
+    <addaction name="actionInputPGSEDiffusion"/>
+    <addaction name="actionDiffusion_Summary"/>
+    <addaction name="actionReset_Grad_and_bvalues"/>
+    <addaction name="actionUse_measured_b_values"/>
+    <addaction name="actionUse_calculated_b_values"/>
+    <addaction name="separator"/>
+    <addaction name="actionUpdate_Gcal_and_Imax"/>
+    <addaction name="actionDiffusion_Analysis_BiExp_NWBW"/>
+    <addaction name="actionDiffusion_Spectra"/>
+   </widget>
+   <widget class="QMenu" name="menuT1T2">
+    <property name="title">
+     <string>T1T2</string>
+    </property>
+    <addaction name="actionT1IR"/>
+    <addaction name="actionT1IR_narrow_wide_bandwidth"/>
+    <addaction name="actionT1IRSpectra"/>
+    <addaction name="actionT2CPMG"/>
+    <addaction name="actionT2CPMGbiExp"/>
+    <addaction name="actionT2CPMGBiExp_Narrow_Wide_Bandwidth"/>
+    <addaction name="actionT2CPMGSpectra"/>
+    <addaction name="actionT2SE"/>
+    <addaction name="actionT1rho"/>
+   </widget>
+   <widget class="QMenu" name="menuImaging">
+    <property name="title">
+     <string>Imaging</string>
+    </property>
+    <addaction name="actionDisplay_2D_Image"/>
+   </widget>
+   <widget class="QMenu" name="menuHyperPolarization">
+    <property name="title">
+     <string>HyperPolarization</string>
+    </property>
+    <addaction name="actionHP_Analysis"/>
+   </widget>
+   <widget class="QMenu" name="menuCalibrations">
+    <property name="title">
+     <string>Calibrations</string>
+    </property>
+    <addaction name="actionNutation"/>
+    <addaction name="actionOpen_Gradient_Calibration_File"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuData"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuMake_Data"/>
+   <addaction name="menuUncertainty"/>
+   <addaction name="menuCalibrations"/>
+   <addaction name="menuT1T2"/>
+   <addaction name="menuDiffusion"/>
+   <addaction name="menuReport"/>
+   <addaction name="menuImaging"/>
+   <addaction name="menuHyperPolarization"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpenDataFile">
+   <property name="text">
+    <string>Open NMR Data File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionGeometric_DIstortion">
+   <property name="text">
+    <string>Geometric DIstortion</string>
+   </property>
+  </action>
+  <action name="actionT1_Anaylsis">
+   <property name="text">
+    <string>T1 Anaylsis</string>
+   </property>
+  </action>
+  <action name="actionT2_Analysis">
+   <property name="text">
+    <string>T2 Analysis</string>
+   </property>
+  </action>
+  <action name="actionProton_Density_Noise">
+   <property name="text">
+    <string>Proton Density/Noise</string>
+   </property>
+  </action>
+  <action name="actionSlice_thickness">
+   <property name="text">
+    <string>Slice thickness</string>
+   </property>
+  </action>
+  <action name="actionLoad_phantom_properties">
+   <property name="text">
+    <string>ROI properties</string>
+   </property>
+  </action>
+  <action name="action3dViewer">
+   <property name="text">
+    <string>View3d</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionPhantom_properties">
+   <property name="text">
+    <string>Phantom properties</string>
+   </property>
+  </action>
+  <action name="actionSaveData">
+   <property name="text">
+    <string>Save Data</string>
+   </property>
+  </action>
+  <action name="actionSave_Data">
+   <property name="text">
+    <string>Save Data</string>
+   </property>
+  </action>
+  <action name="actionEnter_TI_list">
+   <property name="text">
+    <string>Enter TI list</string>
+   </property>
+  </action>
+  <action name="actionPlot_B1_z">
+   <property name="text">
+    <string>plot B1(z)</string>
+   </property>
+  </action>
+  <action name="actionMake_T1IR_data">
+   <property name="text">
+    <string>Make T1IR data</string>
+   </property>
+  </action>
+  <action name="actionEnter_CPMG_list">
+   <property name="text">
+    <string>Enter CPMG loop</string>
+   </property>
+  </action>
+  <action name="actionShowDataWindow">
+   <property name="text">
+    <string>ShowDataWindow</string>
+   </property>
+  </action>
+  <action name="actionClear_Plots">
+   <property name="text">
+    <string>Clear plots</string>
+   </property>
+  </action>
+  <action name="actionSave_Messages">
+   <property name="text">
+    <string>Save messages</string>
+   </property>
+  </action>
+  <action name="actionView2d">
+   <property name="text">
+    <string>View2d</string>
+   </property>
+  </action>
+  <action name="actionSave_Report">
+   <property name="text">
+    <string>Save Report</string>
+   </property>
+  </action>
+  <action name="actionAdd_plots_to_report">
+   <property name="text">
+    <string>Add FID/spectra plots</string>
+   </property>
+  </action>
+  <action name="actionShow_TNT_header">
+   <property name="text">
+    <string>Show TNT header</string>
+   </property>
+  </action>
+  <action name="actionUncertainty_Calculation">
+   <property name="text">
+    <string>Uncertainty Calculation</string>
+   </property>
+  </action>
+  <action name="actionClear_Report">
+   <property name="text">
+    <string>Clear Report</string>
+   </property>
+  </action>
+  <action name="actionChange_Plot_Background">
+   <property name="text">
+    <string>Change Plot Background</string>
+   </property>
+  </action>
+  <action name="actionToggle_Plot_Background">
+   <property name="text">
+    <string>Toggle Plot Background</string>
+   </property>
+  </action>
+  <action name="actionCalculate_Baselines">
+   <property name="text">
+    <string>Calculate Baselines</string>
+   </property>
+  </action>
+  <action name="actionFit_Lorentzians">
+   <property name="text">
+    <string>Fit Lorentzians</string>
+   </property>
+  </action>
+  <action name="actionDelete_current_repeat">
+   <property name="text">
+    <string>Delete current repeat</string>
+   </property>
+  </action>
+  <action name="actionReset_data">
+   <property name="text">
+    <string>Reset data</string>
+   </property>
+  </action>
+  <action name="actionInvert_data">
+   <property name="text">
+    <string>Invert data</string>
+   </property>
+  </action>
+  <action name="actionPlot_RI_or_AP">
+   <property name="text">
+    <string>Plot Real,Imag or Amp,Phase</string>
+   </property>
+  </action>
+  <action name="actionReset_Grad_and_bvalues">
+   <property name="text">
+    <string>Reset Grad and bvalues</string>
+   </property>
+  </action>
+  <action name="actionInput_Gradient_current_traces">
+   <property name="text">
+    <string>1. Input gradient current traces</string>
+   </property>
+   <property name="toolTip">
+    <string>Inputs Gradient Waveforms. Looks for gxcal, gycal, gzcal in file name, assume col0=time(s), col1=Gx(V), col2=Gy(V), col3=Gz(V), requires first 10% to be zero to determine baseline</string>
+   </property>
+  </action>
+  <action name="actionUse_measured_b_values">
+   <property name="text">
+    <string>Use measured b-values</string>
+   </property>
+  </action>
+  <action name="actionUse_calculated_b_values">
+   <property name="text">
+    <string>Use calculated b-values</string>
+   </property>
+  </action>
+  <action name="actionCalculate_Image_Widths">
+   <property name="text">
+    <string>2. Input 1D PGSE images, Calculate image widths</string>
+   </property>
+  </action>
+  <action name="actionPrint_PD_Data">
+   <property name="text">
+    <string>Print PD Data</string>
+   </property>
+  </action>
+  <action name="actionRemove_leading_trailing_points">
+   <property name="text">
+    <string>Remove leading and trailing points</string>
+   </property>
+  </action>
+  <action name="actionOpenDataFile_2">
+   <property name="text">
+    <string>2. Input 1D PGSE Images</string>
+   </property>
+  </action>
+  <action name="actionInputPGSEDiffusion">
+   <property name="text">
+    <string>4. Input PGSE diffusion data</string>
+   </property>
+  </action>
+  <action name="actionDiffusion_Summary">
+   <property name="text">
+    <string>5. Diffusion Summary</string>
+   </property>
+  </action>
+  <action name="actionT1IR">
+   <property name="text">
+    <string>T1IR</string>
+   </property>
+  </action>
+  <action name="actionT2CPMG">
+   <property name="text">
+    <string>T2CPMG</string>
+   </property>
+  </action>
+  <action name="actionInput_eddycurrent_correction">
+   <property name="text">
+    <string>3. Input eddycurrent correction</string>
+   </property>
+  </action>
+  <action name="actionDiffusionAnalysis">
+   <property name="text">
+    <string>DiffusionAnalysis</string>
+   </property>
+  </action>
+  <action name="actionDisplay_2D_Image">
+   <property name="text">
+    <string>Display 2D Image</string>
+   </property>
+  </action>
+  <action name="actionDisplay_2D_Phase_Image">
+   <property name="text">
+    <string>Display 2D Phase Image</string>
+   </property>
+  </action>
+  <action name="actionDisplay_2D_Real_Image">
+   <property name="text">
+    <string>Display 2D Real Image</string>
+   </property>
+  </action>
+  <action name="actionDisplay_2D_Imag_Image">
+   <property name="text">
+    <string>Display 2D Imag Image</string>
+   </property>
+  </action>
+  <action name="actionUpdate_Gcal_and_Imax">
+   <property name="text">
+    <string>Update Gcal and Imax</string>
+   </property>
+  </action>
+  <action name="actionT1rho">
+   <property name="text">
+    <string>T1rho</string>
+   </property>
+  </action>
+  <action name="actionSubtract_reference_curve">
+   <property name="text">
+    <string>Subtract reference curve</string>
+   </property>
+  </action>
+  <action name="actionT2SE">
+   <property name="text">
+    <string>T2SE</string>
+   </property>
+  </action>
+  <action name="actionT2CPMGSpectra">
+   <property name="text">
+    <string>T2CPMGSpectra</string>
+   </property>
+  </action>
+  <action name="actionHP_Analysis">
+   <property name="text">
+    <string>HP Analysis</string>
+   </property>
+  </action>
+  <action name="actionKurtosisAnalysis">
+   <property name="text">
+    <string>KurtosisAnalysis</string>
+   </property>
+  </action>
+  <action name="actionInputPGSEKurtosis">
+   <property name="text">
+    <string>4. Input PGSE kurtosis data</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionT1IR_narrow_wide_bandwidth">
+   <property name="text">
+    <string>T1IR narrow-wide bandwidth</string>
+   </property>
+   <property name="toolTip">
+    <string>Caclulates T1 from Inversion Recovery data for a narrow bandwith and a wide (MRI effective bandwidth)</string>
+   </property>
+   <property name="statusTip">
+    <string>Caclulates T1 from Inversion Recovery data for a narrow bandwith and a wide (MRI effective bandwidth)</string>
+   </property>
+   <property name="whatsThis">
+    <string>Caclulates T1 from Inversion Recovery data for a narrow bandwith and a wide (MRI effective bandwidth)</string>
+   </property>
+  </action>
+  <action name="actionT2CPMGbiExp">
+   <property name="text">
+    <string>T2CPMGbiExp</string>
+   </property>
+  </action>
+  <action name="actionT2CPMGBiExp_Narrow_Wide_Bandwidth">
+   <property name="text">
+    <string>T2CPMGBiExp Narrow-Wide Bandwidth</string>
+   </property>
+  </action>
+  <action name="actionDiffusion_Analysis_BiExp_NWBW">
+   <property name="text">
+    <string>Diffusion Analysis BiExp NWBW</string>
+   </property>
+  </action>
+  <action name="actionT1IRSpectra">
+   <property name="text">
+    <string>T1IRSpectra</string>
+   </property>
+  </action>
+  <action name="actionNutation">
+   <property name="text">
+    <string>Nutation t90/ RF Field</string>
+   </property>
+  </action>
+  <action name="actionGradientCalibrationXY">
+   <property name="text">
+    <string>GradientCalibrationXY</string>
+   </property>
+  </action>
+  <action name="actionOpenGradientCalibrationFile">
+   <property name="text">
+    <string>OpenGradientCalibrationFile</string>
+   </property>
+  </action>
+  <action name="actionOpen_Gradient_Calibration_File">
+   <property name="text">
+    <string>Open Gradient Calibration File</string>
+   </property>
+  </action>
+  <action name="actionMake_Diffusion_data">
+   <property name="text">
+    <string>Make Diffusion data</string>
+   </property>
+  </action>
+  <action name="actionDiffusion_Spectra">
+   <property name="text">
+    <string>Diffusion Spectra</string>
+   </property>
+   <property name="toolTip">
+    <string>Calulates BiExponetial Diffusion Spectra</string>
+   </property>
+  </action>
+  <action name="actionShow_Crosshairs">
+   <property name="text">
+    <string>Show Crosshairs</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>pyNMRGui</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>477</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

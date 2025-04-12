@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'designer\\uncertaintyGUI.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Uncertainty(object):
+    def setupUi(self, Uncertainty):
+        Uncertainty.setObjectName("Uncertainty")
+        Uncertainty.resize(1186, 729)
+        self.centralwidget = QtWidgets.QWidget(Uncertainty)
+        self.centralwidget.setObjectName("centralwidget")
+        self.pbCalculateUncertainty = QtWidgets.QPushButton(self.centralwidget)
+        self.pbCalculateUncertainty.setGeometry(QtCore.QRect(40, 440, 401, 57))
+        self.pbCalculateUncertainty.setObjectName("pbCalculateUncertainty")
+        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(30, 70, 561, 323))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setObjectName("formLayout")
+        self.label = QtWidgets.QLabel(self.layoutWidget)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.leT1Reported = QtWidgets.QLineEdit(self.layoutWidget)
+        self.leT1Reported.setObjectName("leT1Reported")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.leT1Reported)
+        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_2.setObjectName("label_2")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.leT2Reported = QtWidgets.QLineEdit(self.layoutWidget)
+        self.leT2Reported.setObjectName("leT2Reported")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.leT2Reported)
+        self.verticalLayout.addLayout(self.formLayout)
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.label_3 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_3.setObjectName("label_3")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        self.leT1Uncertainty = QtWidgets.QLineEdit(self.layoutWidget)
+        self.leT1Uncertainty.setObjectName("leT1Uncertainty")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.leT1Uncertainty)
+        self.label_4 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_4.setObjectName("label_4")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_4)
+        self.leT2Uncertainty = QtWidgets.QLineEdit(self.layoutWidget)
+        self.leT2Uncertainty.setObjectName("leT2Uncertainty")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.leT2Uncertainty)
+        self.verticalLayout.addLayout(self.formLayout_2)
+        self.formLayout_3 = QtWidgets.QFormLayout()
+        self.formLayout_3.setObjectName("formLayout_3")
+        self.label_5 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_5.setObjectName("label_5")
+        self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_5)
+        self.ledT1dT = QtWidgets.QLineEdit(self.layoutWidget)
+        self.ledT1dT.setObjectName("ledT1dT")
+        self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.ledT1dT)
+        self.label_6 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_6.setObjectName("label_6")
+        self.formLayout_3.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_6)
+        self.ledT2dT = QtWidgets.QLineEdit(self.layoutWidget)
+        self.ledT2dT.setObjectName("ledT2dT")
+        self.formLayout_3.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.ledT2dT)
+        self.verticalLayout.addLayout(self.formLayout_3)
+        Uncertainty.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Uncertainty)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1186, 47))
+        self.menubar.setObjectName("menubar")
+        Uncertainty.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Uncertainty)
+        self.statusbar.setObjectName("statusbar")
+        Uncertainty.setStatusBar(self.statusbar)
+
+        self.retranslateUi(Uncertainty)
+        QtCore.QMetaObject.connectSlotsByName(Uncertainty)
+
+    def retranslateUi(self, Uncertainty):
+        _translate = QtCore.QCoreApplication.translate
+        Uncertainty.setWindowTitle(_translate("Uncertainty", "Uncertainty"))
+        self.pbCalculateUncertainty.setText(_translate("Uncertainty", "Calculate Uncertainty"))
+        self.label.setText(_translate("Uncertainty", "T1 reported (ms)"))
+        self.label_2.setText(_translate("Uncertainty", "T2 reported (ms)"))
+        self.label_3.setText(_translate("Uncertainty", "T1 uncertainty (ms)"))
+        self.label_4.setText(_translate("Uncertainty", "T2 uncertainty (ms)"))
+        self.label_5.setText(_translate("Uncertainty", "dT1/dT (%/C)"))
+        self.label_6.setText(_translate("Uncertainty", "dT2/dT (%/C)"))
+
