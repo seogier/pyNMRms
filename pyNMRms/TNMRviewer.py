@@ -3,6 +3,8 @@ Created on Nov 7, 2023
 
 @author: russek
 
+Classes to display 4d NMR/MRI data from Tecmag TNMR
+
 Conventions:
 
 all stored parameter units are SI (T, m, s, A), ***displayed units may be mm, ms, mT
@@ -27,12 +29,19 @@ from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons  
 import pyqtgraph as pg
+import pyqtgraph.exporters
 import pyqtgraph.opengl as gl
 from processTNT import TNTfile
 from scipy import constants
 from scipy.ndimage import zoom   #used for interpolation of images
 import pydicom    #pydicom is used to import DICOM images  pydicom.UID
 from pydicom.dataset import Dataset, FileDataset
+try: #import module to read hyperfine DICOM
+    import Hyperfine
+except:
+    pass
+import ImageList
+#import cv2
 try:
     import ImageList  #class to make an image list from a stack of image files, used on PhantomViewer
 except:
@@ -52,6 +61,7 @@ class TNMRviewer(QMainWindow):
         super(TNMRviewer, self).__init__(parent)
         #self.win.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.resize(1000,800)
+        self.setStyleSheet("QMainWindow { background-color: lightblue; }")
         if daughter!=None:
             self.daughter=daughter
         self.imv = pg.ImageView( view = pg.PlotItem(),discreteTimeLine=True)
@@ -82,6 +92,7 @@ class TNMRviewer(QMainWindow):
         self.paramSlider.valueChanged.connect(self.paramSliderChange)
         self.imv.sigTimeChanged.connect(self.sliceSliderChange)
         self.imv.timeLine.setPen(width=10, color='lightblue')
+
  
         #self.setCentralWidget(self.imv)
         self.programID='TNMRviewer: '
@@ -110,6 +121,7 @@ class TNMRviewer(QMainWindow):
         self.plotOrientation=(0,1,2,3)  #tuple to determine plot dimension
         self.hiddenIndex='{}={}'.format('Parameter',0) 
         self.TE0=0.006501  # 1/2 minimum TE time in (s) TE=2(teDelay+TE0) 
+        self.GEMSTE0=0.0072  #  minimum GEMS TE time in (s) TE=teDelay+GEMSTE0 for standard GEMS it is 7.2ms 
         self.TI0=0.004505  #  minimum TI time in (s) TI=tiDelay+TI0
         self.messages=''#messAages generated from image processing
         self.messageTextBox=self.InfoWindow()     #generate a message textbox
@@ -119,7 +131,7 @@ class TNMRviewer(QMainWindow):
         self.HorizontalUnits='voxel index'
         self.VerticalUnits='voxel index'
         self.fileName=''
-
+        self.dataType='?'    #'RawMag':'RawPhase':'ReconMag','ReconPhase','HFdata':
             #Physical Constants
         self.GammaPMHzperT=constants.physical_constants["proton gyromag. ratio over 2 pi"][0]   #in MHz/T 
         self.GammaPHzperT=1E6*constants.physical_constants["proton gyromag. ratio over 2 pi"][0]   #in Hz/T 
@@ -182,7 +194,11 @@ class TNMRviewer(QMainWindow):
         
         self.actionWriteAnimatedGIF = QAction('Save as animated GIF', self)
         self.fileMenu.addAction(self.actionWriteAnimatedGIF)
-        self.actionWriteAnimatedGIF.triggered.connect(self.writeAnimatedGIF)     
+        self.actionWriteAnimatedGIF.triggered.connect(self.writeAnimatedGIF)   
+        
+        self.actionExportPNG = QAction('Save as PNGs', self)
+        self.fileMenu.addAction(self.actionExportPNG)
+        self.actionExportPNG.triggered.connect(self.exportPNG)     
 
         if daughter!=None:        
             self.actionMakeDaughter = QAction('Show Daughter Image Viewer', self)
@@ -240,7 +256,7 @@ class TNMRviewer(QMainWindow):
         self.imageMenu.addAction(self.actionToggleScaledView)
         self.actionToggleScaledView.triggered.connect(self.toggleScaledVoxelView)
         
-        self.actionZeroNoise = QAction('Zero Noise', self)
+        self.actionZeroNoise = QAction('Set signal outside histogram to NaN', self)
         self.imageMenu.addAction(self.actionZeroNoise)
         self.actionZeroNoise.triggered.connect(self.zeroNoise)
         
@@ -299,8 +315,48 @@ class TNMRviewer(QMainWindow):
         self.actionAddHorizontalMarkers.triggered.connect(self.addHorizontalMarkers)  
         self.actionRemoveMarkers = QAction('Remove markers', self)
         self.imageMenu.addAction(self.actionRemoveMarkers)
-        self.actionRemoveMarkers.triggered.connect(self.removeMarkers)    
-             
+        self.actionRemoveMarkers.triggered.connect(self.removeMarkers)   
+        
+        self.imageMenu = self.menu.addMenu('&Plot')
+        self.actionToggleHistogramLogMode = QAction('Toggle Histogram Log Mode', self)
+        self.imageMenu.addAction(self.actionToggleHistogramLogMode)
+        self.actionToggleHistogramLogMode.triggered.connect(self.toggleHistogramLogMode)     
+
+        self.HyperfineMenu = self.menu.addMenu('&Hyperfine')
+        # self.actionOpenHyperfineDICOM = QAction('Open Hyperfine DICOM file, start new stack', self)
+        # self.HyperfineMenu.addAction(self.actionOpenHyperfineDICOM)
+        # self.actionOpenHyperfineDICOM.triggered.connect(self.openHyperfineFile)
+        #
+
+        self.actionOpenHyperfineDICOMs= QAction('Open Hyperfine DICOMs', self)
+        self.HyperfineMenu.addAction(self.actionOpenHyperfineDICOMs)
+        self.actionOpenHyperfineDICOMs.triggered.connect(self.openHyperfineFiles)
+        
+        self.actionAddToHyperfineStack = QAction('Add Hyperfine DICOM to Stack', self)
+        self.HyperfineMenu.addAction(self.actionAddToHyperfineStack)
+        self.actionAddToHyperfineStack.triggered.connect(lambda: self.openHyperfineFile(stack=True))  
+        
+        self.actionSubtractImage0fromHyperfineStack = QAction('Subtract Image0', self)
+        self.HyperfineMenu.addAction(self.actionSubtractImage0fromHyperfineStack)
+        self.actionSubtractImage0fromHyperfineStack.triggered.connect(self.SubtractImage0fromHyperfineStack)  
+        
+        self.actionDivideImage0fromHyperfineStack = QAction('Divide by Image0', self)
+        self.HyperfineMenu.addAction(self.actionDivideImage0fromHyperfineStack)
+        self.actionDivideImage0fromHyperfineStack.triggered.connect(self.DivideImage0fromHyperfineStack)    
+        
+        self.actionScalemHyperfineStack = QAction('Scale HyperfineStack', self)
+        self.HyperfineMenu.addAction(self.actionScalemHyperfineStack)
+        self.actionScalemHyperfineStack.triggered.connect(self.interpolateHF)
+        
+        self.actionInterchangeSlice_Parameter = QAction('Interchange Slice & Parameter in HyperfineStack', self)
+        self.HyperfineMenu.addAction(self.actionInterchangeSlice_Parameter)
+        self.actionInterchangeSlice_Parameter.triggered.connect(self.interchangeSlice_Parameter)   
+        self.actionInterchangeSlice_X = QAction('Interchange Slice & X in HyperfineStack', self)
+        self.HyperfineMenu.addAction(self.actionInterchangeSlice_X)
+        self.actionInterchangeSlice_X.triggered.connect(self.interchangeSlice_X)
+        self.actionInterchangeX_Y = QAction('Interchange X & Y in HyperfineStack', self)
+        self.HyperfineMenu.addAction(self.actionInterchangeX_Y)
+        self.actionInterchangeX_Y.triggered.connect(self.interchangeX_Y)        
         
         self.imv.getView().setLabel('bottom',"H","voxel index")
         self.imv.getView().setLabel('left',"V","voxel index")
@@ -347,17 +403,25 @@ class TNMRviewer(QMainWindow):
         self.message('filename=' +self.fileName)
         self.ProtocolName=""
         if self.fileName.find('SEMS')!= -1:
-            self.ProtocolName="SEMS"    
+            self.ProtocolName="SEMS"
+            self.DataType='T2'    
         if self.fileName.find('SEMS_IR')!= -1:
             self.ProtocolName="SEMS_IR"  
+            self.DataType='T1'
         if self.fileName.find('GE_FLASH')!= -1:
             self.ProtocolName="GE_FLASH"    
+        if self.fileName.find('GEMS')!= -1:
+            self.ProtocolName="GEMS"
+            self.DataType='T2'   
         if self.fileName.find('GEMS_IR')!= -1:
             self.ProtocolName="GEMS_IR"    
         if self.fileName.find('SCOUT')!= -1:
             self.ProtocolName="SCOUT"       
         if self.fileName.find('PGSE_Dif')!= -1:
             self.ProtocolName="PGSE_Dif"       
+        if self.fileName.find('B1Map')!= -1:
+            self.ProtocolName="B1Map"
+            self.DataType='B1Map'
         self.message('ProtocolName=' +self.ProtocolName)
         self.tntData=np.swapaxes(self.tntfile.DATA, 0,1) #input 4 dimensional data array, rearrange to get slice, readout, phase, parameter
         self.nSlice= self.tntData.shape[0]
@@ -392,10 +456,7 @@ class TNMRviewer(QMainWindow):
         self.InversionTime=0.1 
         self.SliceThickness=3 
         self.SliceLocation=0 
-        try:
-            self.tntGradOrientation=self.tntfile.gradOrientation.replace("'", '').replace('b','') 
-        except:
-            self.tntGradOrientation='NA'
+        self.tntGradOrientation=self.tntfile.gradOrientation.replace("'", '').replace('b','')   
         self.FoVX=160 
         self.FoVY=160
         self.HorizontalLabel='Readout {}'.format(self.tntGradOrientation[0])
@@ -408,11 +469,16 @@ class TNMRviewer(QMainWindow):
             self.message('Slice frequencies found, sliceFrequencies(Hz)={}, Slice positions(mm)={}'.format(np.array2string(self.sliceFrequencies,max_line_width=None, precision=2),np.array2string(self.slicePositions*1000,max_line_width=None, precision=2)))
         except:
             self.message('Slice frequencies not found')
-        if self.ProtocolName=="GEMS" or self.ProtocolName=="SEMS":
+        if self.ProtocolName=="SEMS":
           self.teDelay=self.tntTables.get('teDelay')
           self.TEArray=2*(self.teDelay+self.TE0)
           self.parameterArray=self.TEArray
           self.message('Set image protocol to T2SE, TEArray(ms)={}.'.format(np.array2string(self.TEArray*1000,max_line_width=None, precision=2)))
+        if self.ProtocolName=="GEMS" :
+          self.teDelay=self.tntTables.get('teDelay')
+          self.TEArray=(self.teDelay+self.GEMSTE0)      #only one teDelay in GEMS
+          self.parameterArray=self.TEArray
+          self.message('Set image protocol to GEMS T2*, TEArray(ms)={}.'.format(np.array2string(self.TEArray*1000,max_line_width=None, precision=2)))
         if self.ProtocolName=="SEMS_IR":
           self.tiDelay=self.tntTables.get('tiDelay')
           self.TIArray=self.tiDelay+self.TI0
@@ -428,8 +494,167 @@ class TNMRviewer(QMainWindow):
                   self.bValueArray=np.fromstring(bvalues, sep=',')
                   self.parameterArray=self.bValueArray
                   self.message('Image protocol PGSE_Dif, b-ValueArray(s/mm^2)={}.'.format(np.array2string(self.bValueArray,max_line_width=None, precision=2)))
+        if self.ProtocolName=="B1Map": 
+            try:
+                self.rf90Attn=self.tntTables.get('rfAttn90Sweep')
+                self.b1MagArray=(10**((60-self.rf90Attn)/20))/10     #B1 amplitude normalized so 0attn with max DAC output=100 
+                self.message('rf90 Attn found, rf90Attn(dB)={}'.format(np.array2string(self.rf90Attn,max_line_width=None, precision=2)))
+                self.message('B1 (normalized to max 100)={}'.format(np.array2string( self.b1MagArray,max_line_width=None, precision=2)))
+                self.message('Set image protocol to B1Map')
+            except:
+                self.message('rf90 Attn not found')   
         #self.tntfile.TMAG[name]
-        
+
+      def openHyperfineFiles(self, stack=False):
+        '''Open Hyperfine DICOM files, data is extracted as 4d array with readout,slice,phase,parameter 
+        reorder to slice, readout, phase, parameter'''
+        f = QFileDialog.getOpenFileNames(self,'Open set Hyperfine files', '', "Hyperfine DICOM Files (*.dcm)")        #Note self.FileName is a qString not a string
+        if f[0]=='':
+          return 'cancel'
+        self.fileNames=f[0]
+        for index, file in enumerate(self.fileNames):
+            if  index==0:
+                self.openHyperfineFile(stack=False, filename=file)        #create a stack for first file
+            else:
+                self.openHyperfineFile(stack=True,filename=file)         #add to existing stack
+                
+       
+      def openHyperfineFile(self, stack=False, filename=None):
+        '''Open Hyperfine DICOM file, data is extracted as 4d array with readout,slice,phase,parameter 
+        reorder to slice, readout, phase, parameter'''
+        if filename==None:
+            f = QFileDialog.getOpenFileName(self,'Open Hyperfine file', '', "Hyperfine DICOM Files (*.dcm)")        #Note self.FileName is a qString not a string
+            if f[0]=='':
+              return 'cancel'
+            self.fileName=f[0]
+        else:
+            self.fileName=filename
+        hfdata, HFImageFile=Hyperfine.load_HF_dicom(self.fileName, verbose= True,HFscaling=True)        #fi  
+        self.message('filename=' +self.fileName)
+        self.ProtocolName=HFImageFile.SeriesDescription
+        self.message('ProtocolName=' +self.ProtocolName)
+        if stack:       #switch to add file to stack
+            if self.HFData.shape[:3] == hfdata.shape:
+                self.HFData=np.concatenate((self.HFData,np.expand_dims(hfdata, axis=3)), axis=3) #input 4 dimensional data array, rearrange to get slice, readout, phase, parameter
+            else:
+                return
+        else:
+            self.HFData=np.expand_dims(hfdata, axis=3)
+            self.HFIS=ImageList.ImageList()     #make and image stack
+        self.message("HF DICOM shape="+str(self.HFData.shape))
+        self.StudyDate=HFImageFile.StudyDate
+        self.dataType=='HFdata'
+        self.Manufacturer=HFImageFile.Manufacturer
+        self.SeriesDescription=HFImageFile.SeriesDescription
+        if hasattr(HFImageFile,"InstitutionName"):
+            self.InstitutionName=HFImageFile.InstitutionName
+        else:
+            self.InstitutionName='None'          
+        self.PatientName=HFImageFile.PatientName    
+        # self.bValue=0
+        # self.PixelBandwidth=40000      
+        self.PixelSpacing=HFImageFile.PixelSpacing   #column spacing, distance between neighboring columns 
+        self.ImageType="MRI" 
+        # self.ReceiveCoilName='Agilent3T' 
+        #                 #self.RowDirection.append(np.asfarray(ImageFile.ImageOrientationPatient[:3])) if hasattr(ImageFile,"ImageOrientationPatient") else self.RowDirection.append(np.array([1.,0.,0.]))
+        if hasattr(HFImageFile,"RepetitionTime"):
+            self.RepetitionTime=HFImageFile.RepetitionTime
+        else:
+           self.RepetitionTime=0  
+        if hasattr(HFImageFile,"EchoTime"):
+            self.EchoTime=HFImageFile.EchoTime 
+        else:
+            self.EchoTime=np.NaN
+        # self.FlipAngle=90 
+        # #InPlanePhaseEncodingDirection) 
+        if hasattr(HFImageFile,"InversionTime"): 
+            self.InversionTime=HFImageFile.InversionTime 
+        else:
+             self.InversionTime=0
+        self.SliceThickness=HFImageFile.SliceThickness 
+        if hasattr(HFImageFile,"InversionTime"):
+            self.PatientOrientation=HFImageFile.PatientOrientation
+        else:
+            self.PatientOrientation='None'
+        self.message('dX(mm)={:.2f}, dy(mm)={:.2f}, slice thickness(mm)={}, FoVx(mm)={:.2f}, FoVy(mm)={:.2f}, FoVslice(ms)={:.2f}'.format(self.PixelSpacing[0], self.PixelSpacing[1],self.SliceThickness,self.PixelSpacing[0]*self.HFData.shape[1], self.PixelSpacing[1]*self.HFData.shape[2],self.SliceThickness*self.HFData.shape[0]))
+        self.message('TE(ms)={:.2f}, TR(ms)={:.2f}, TI(ms)={:.2f}'.format(self.EchoTime,self.RepetitionTime, self.InversionTime))
+        self.message('Patient Name=' + str(self.PatientName)) 
+        self.message('Patient Orientation=' +str(self.PatientOrientation))
+        self.paramSlider.setMaximum(self.HFData.shape[3]-1)  #left slider is for the 4th dimension
+        self.nParameter=self.HFData.shape[3]          
+        self.hfData=self.HFData
+        self.HFIS.unpackImageFile( HFImageFile, self.fileName, "dcm")       #Add image to stack, note the pixal array will be 3D
+        self.plotHFImage()
+
+      def DivideImage0fromHyperfineStack(self, baseline=0):
+          baseline, OK= QInputDialog.getDouble(self,"Input image baseline", "baseline", value=0, decimals=2)
+          if not OK:
+            return
+          refdata=self.HFData[...,0:1]
+          mask= (refdata<baseline)
+          refdata[mask] = np.nan
+          self.hfData=np.divide(self.HFData, refdata)       #values will be NaN if the reference data is below baseline 
+          self.hfData= 1-self.hfData        #set NaNs to zero
+          #self.hfData== np.nan_to_num(2-self.hfData)        #set NaNs to zero
+          self.plotHFImage()
+      def SubtractImage0fromHyperfineStack(self):
+          self.hfData=self.HFData-self.HFData[...,0:1]  
+          self.plotHFImage()
+          
+      def BlurImage0fromHyperfineStack(self):
+          self.hfData=cv2.GaussianBlur(self.hfData, (5, 5), 0)  # 5x5 kernel, sigma=0  
+          self.plotHFImage()
+
+      def interchangeSlice_Parameter(self): 
+          self.hfData=np.transpose(self.hfData,(3,1,2,0)) 
+          self.plotHFImage()
+      def interchangeSlice_X(self): 
+          self.hfData=np.transpose(self.hfData,(1,0,2,3)) 
+          self.plotHFImage()    
+      def interchangeX_Y(self): 
+          self.hfData=np.transpose(self.hfData,(0,2,1,3)) 
+          self.plotHFImage()  
+          
+          
+      def plotHFImage(self, sliceindex=0, autolevel=True, autorange=True, levels=None):
+        self.setWindowTitle(self.programID+self.fileName+', HF ReconstructedImage  shape={}'.format(self.hfData.shape))
+        self.dataType='HFdata'
+        self.imv.getView().setLabel('bottom',self.HorizontalLabel,self.HorizontalUnits)
+        self.imv.getView().setLabel('left',self.VerticalLabel,self.VerticalUnits)
+        self.imv.setImage(self.hfData[:,:,:,self.paramIndex],autoRange=autorange, autoLevels=autolevel, levels=levels) #,axes=self.dataAxes,scale = (self.xscale,self.yscale),autoLevels=autolevel
+        if sliceindex >=0:
+            self.imv.setCurrentIndex(sliceindex)
+            self.imv.updateImage()
+
+      def setHFOrientation(self):
+        orient=list(self.imageOrientation)
+        d0, ok = QInputDialog.getInt(self, "Image orientation", "select do",  0, Min=0, Max=3)
+        d1, ok = QInputDialog.getInt(self, "Image orientation", "select d1",  0, Min=0, Max=3)
+        d2, ok = QInputDialog.getInt(self, "Image orientation", "select d2",  0, Min=0, Max=3)
+        d3, ok = QInputDialog.getInt(self, "Image orientation", "select d3",  0, Min=0, Max=3)
+        np.transpose(self.hfData,[d0,d1,d2,d3])
+        self.addPlotHFImage()
+          
+          
+          
+      def interpolateHF(self):
+        '''scales and interpolates 2d images using PIL.image.resize, changes image array size
+        3d image are scaled using scipy.ndimage.zoom'''
+        interp= ['bicubic', 'nearest', 'bilinear', 'lanczos']
+        scalex,ok = QInputDialog.getDouble(self, "Scale X",'the number of rows will be increased (or decreased) by', value=2.0, min=0.1, max=10.0,decimals=2)
+        if not ok:
+          return
+        scaley,ok = QInputDialog.getDouble(self, "Scale Y",'the number of columns will be increased (or decreased) by', 2.0, 0.1, 10.0,1)
+        if not ok:
+          return
+        scalez,ok = QInputDialog.getDouble(self, "Scale Z",'the number of images in stack will be increased (or decreased) by', 1.0, 0.1, 10.0,1)
+        if not ok:
+            return
+        self.HFData=zoom(self.HFData, (scalez,scalex,scaley,1),order=4)
+        self.hfData=self.HFData
+        self.setWindowTitle(self.programID+'Hyperfine data scaled by sx={}, sy={}, sz={}'.format(scalex, scaley,scalez))
+        self.plotHFImage(autorange=False)
+
       def flipROandPhase(self):
         self.tntData=np.flip(self.tntData, axis=1)
         self.tntData=np.flip(self.tntData, axis=2)
@@ -575,6 +800,8 @@ class TNMRviewer(QMainWindow):
                   self.plotFFTMag(sliceindex=self.sliceIndex,autolevel=False)
             if self.dataType=='ReconPhase':
                   self.plotFFTPhase(sliceindex=self.sliceIndex,autolevel=False) 
+            if self.dataType=='HFdata':
+                  self.plotHFImage(sliceindex=self.sliceIndex,autolevel=False, autorange=False) 
         except:
             pass
                                     
@@ -637,7 +864,8 @@ class TNMRviewer(QMainWindow):
         #scale image to levels set on the histogram
         self.min_level, self.max_level = self.imv.ui.histogram.getLevels()
         data-=self.min_level
-        data[data< 0]=0.0
+        data[data< 0]=0.0       #set values belwo the histogram minimum to zero
+        data[data==np.NaN]=0.0 #set NaNs to zero
         data[data>(self.max_level-self.min_level)]=0.0
         data=data/np.amax(data)
         if invert:
@@ -744,6 +972,7 @@ class TNMRviewer(QMainWindow):
           smin, smax = self.imv.ui.histogram.getLevels()
           self.fftData[np.absolute(self.fftData)< smin]=np.nan 
           self.fftData[np.absolute(self.fftData)> smax]=np.nan 
+          self.message('Data below {:.2f} and data above {:.2f} have been set to NaN'.format(smin, smax))
           self.plotFFTMag()
           
       def zeroKspacePoint(self):
@@ -772,11 +1001,27 @@ class TNMRviewer(QMainWindow):
           
       def writeAnimatedGIF(self, filename='', duration=0.2):         
         filename = self.fileName.replace('.tnt', ".gif")
+        filename = self.fileName.replace('.dcm', ".gif")
         im=np.copy(self.imv.image)
         im=np.swapaxes(im, 1,2)
         im-=im.min()    #set lowest value to 0
         im*=255.0/im.max()  #set highest value to 255
         imageio.mimsave(filename, im.astype(np.uint8), format='GIF', duration=duration)
+        self.message("wrote animated GIF to "+ filename)
+        
+      def exportPNG(self):
+        '''Exports images to png'''
+        f = QFileDialog.getSaveFileName(self,'Enter filename', '', "PNG Files (*.png)")
+        if f[0]=='':
+                return 'cancel'
+        filename=f[0]
+        self.message("Saving png files to" + filename)
+        for i in range(self.nParameter):
+            self.paramIndex=i
+            self.plotHFImage(sliceindex=self.sliceIndex,autolevel=False, autorange=False, levels=(0,2)) 
+            exporter = pg.exporters.ImageExporter(self.imv.view)
+            fn=filename+str(i)
+            exporter.export(fn)
                           
       def writeDicomFiles(self, filename):
             '''Writes current image stack to a stack of DICOM files'''
@@ -870,65 +1115,75 @@ class TNMRviewer(QMainWindow):
       def makeImageStack(self): 
             """Makes a image stack for PhantomViewer from current plot, replicates a stack of DICOM images and headers"""
             self.stackIndex=3   
-            sI,ok = QInputDialog.getInt(self, "Stack Index",'stack dimension', value=3, min=0, max=3)
+            sI,ok = QInputDialog.getInt(self, "Stack Index",'0= stack on slice, 3= stack on parameter', value=3, min=0, max=3)
             if ok:
                 self.stackIndex=sI
             nslice=self.sliceIndex
             self.iS=ImageList.ImageList()
-            
-            for i in range (self.rawData.shape[self.stackIndex]):
-                #System and scan information
-                self.iS.FileName.append(self.fileName) 
-                self.iS.StudyDate.append(self.StudyDate) 
-                self.iS.StudyDate.append(self.StudyDate) 
-                self.iS.Manufacturer.append(self.Manufacturer) 
-                self.iS.SeriesDescription.append(self.SeriesDescription) 
-                self.iS.InstitutionName.append(self.InstitutionName)     
-                self.iS.MagneticFieldStrength.append(self.MagneticFieldStrength) 
-                self.iS.ImagingFrequency.append(self.ImagingFrequency)         
-                self.iS.PatientName.append(self.PatientName)    
-                self.iS.DataType.append(self.DataType)
-                if self.stackIndex==3:  
-                    self.iS.PA.append(np.absolute(self.fftData[nslice,:,:,i])) #add pixel arrays
-                if self.stackIndex==0:  
-                    self.iS.PA.append(np.absolute(self.fftData[i,:,:,0])) #add pixel arrays
-                self.iS.Comment.append(self.tntComment) 
-
-                self.iS.Columns.append(self.rawData.shape[1])
-                self.iS.Rows.append(self.rawData.shape[2])
-                self.iS.header.append('header') 
-                self.iS.PixelBandwidth.append(self.PixelBandwidth)      
-                self.iS.PixelSpacingX.append(self.FoVX/self.rawData.shape[1])    #column spacing, distance between neighboring columns
-                self.iS.PixelSpacingY.append(self.FoVY/self.rawData.shape[2])   #row spacing, distance between neighboring rows  
-                self.iS.ProtocolName.append(self.ProtocolName)    
-                self.iS.ImagePosition.append(np.array([0,0,0]))
-                self.iS.ImageType.append(self.ImageType) 
-                self.iS.ReceiveCoilName.append(self.ReceiveCoilName) 
-                self.iS.RowDirection.append(np.array([1.,0.,0.]))
-                self.iS.ColumnDirection.append(np.array([0.,1.,0.]))
-                self.iS.TR.append(self.RepetitionTime) 
-                if self.ProtocolName=='SEMS' and self.TEArray.shape[0]>0:
-                    self.iS.TE.append(1000*self.TEArray[i])
-                else:
-                     self.iS.TE.append(self.EchoTime)
-                if self.ProtocolName=='SEMS_IR' and self.stackIndex==3:
-                    self.iS.TI.append(1000*self.TIArray[i])
-                else:
-                     self.iS.TI.append(self.InversionTime)
-                
-                if self.ProtocolName=='PGSE_Dif' and self.stackIndex==3:
-                    self.iS.bValue.append(self.bValueArray[i])
-                else:
-                    self.iS.bValue.append(0.0)
-                self.iS.FA.append(self.FlipAngle) 
-                self.iS.InPlanePhaseEncodingDirection.append("")
-                self.iS.SliceThickness.append(self.SliceThickness) 
-                self.iS.SliceLocation.append(self.SliceLocation)
-                self.iS.ScaleSlope.append (1.0)  #default value is 1
-                self.iS.ScaleIntercept.append (0.0)    #default value is 0 
+            if self.dataType=='HFdata':     #Hyperfine Image Stack
+                for i in range (self.hfData.shape[self.stackIndex]):
+                    if self.stackIndex==3: 
+                        self.HFIS.PA[i+1]=self.hfData[nslice,:,:,i] #add pixel arrays
+                    if self.stackIndex==0:  
+                        self.HFIS.PA[i+1]=self.hfData[i,:,:,0] #add pixel arrays
+                return self.HFIS    #return Hyperfine Image Stack
+            else:
+                for i in range (self.rawData.shape[self.stackIndex]):
+                    #System and scan information
+                    self.iS.FileName.append(self.fileName) 
+                    self.iS.StudyDate.append(self.StudyDate) 
+                    self.iS.Manufacturer.append(self.Manufacturer) 
+                    self.iS.SeriesDescription.append(self.SeriesDescription) 
+                    self.iS.InstitutionName.append(self.InstitutionName)     
+                    self.iS.MagneticFieldStrength.append(self.MagneticFieldStrength) 
+                    self.iS.ImagingFrequency.append(self.ImagingFrequency)         
+                    self.iS.PatientName.append(self.PatientName)    
+                    self.iS.DataType.append(self.DataType)
+                    if self.stackIndex==3:  
+                        self.iS.PA.append(np.absolute(self.fftData[nslice,:,:,i])) #add pixel arrays
+                    if self.stackIndex==0:  
+                        self.iS.PA.append(np.absolute(self.fftData[i,:,:,0])) #add pixel arrays
+                    self.iS.Comment.append(self.tntComment) 
     
-                self.iS.FoVX.append(self.FoVX) 
-                self.iS.FoVY.append(self.FoVY)
+                    self.iS.Columns.append(self.rawData.shape[1])
+                    self.iS.Rows.append(self.rawData.shape[2])
+                    self.iS.header.append('header') 
+                    self.iS.PixelBandwidth.append(self.PixelBandwidth)      
+                    self.iS.PixelSpacingX.append(self.FoVX/self.rawData.shape[1])    #column spacing, distance between neighboring columns
+                    self.iS.PixelSpacingY.append(self.FoVY/self.rawData.shape[2])   #row spacing, distance between neighboring rows  
+                    self.iS.ProtocolName.append(self.ProtocolName)    
+                    self.iS.ImagePosition.append(np.array([0,0,0]))
+                    self.iS.ImageType.append(self.ImageType) 
+                    self.iS.ReceiveCoilName.append(self.ReceiveCoilName) 
+                    self.iS.RowDirection.append(np.array([1.,0.,0.]))
+                    self.iS.ColumnDirection.append(np.array([0.,1.,0.]))
+                    self.iS.TR.append(self.RepetitionTime) 
+                    if (self.ProtocolName=='SEMS' or self.ProtocolName=='GEMS') and self.TEArray.shape[0]>0:
+                        self.iS.TE.append(1000*self.TEArray[i])
+                    else:
+                         self.iS.TE.append(self.EchoTime)
+                    if self.ProtocolName=='SEMS_IR' and self.stackIndex==3:
+                        self.iS.TI.append(1000*self.TIArray[i])
+                    else:
+                         self.iS.TI.append(self.InversionTime)
+                    
+                    if self.ProtocolName=='PGSE_Dif' and self.stackIndex==3:
+                        self.iS.bValue.append(self.bValueArray[i])
+                    else:
+                        self.iS.bValue.append(0.0)
+                    if self.ProtocolName=='B1Map' and self.stackIndex==3:
+                        self.iS.B190.append(self.b1MagArray[i])
+                    else:
+                        self.iS.B190.append(0.0)                        
+                    self.iS.FA.append(self.FlipAngle) 
+                    self.iS.InPlanePhaseEncodingDirection.append("")
+                    self.iS.SliceThickness.append(self.SliceThickness) 
+                    self.iS.SliceLocation.append(self.SliceLocation)
+                    self.iS.ScaleSlope.append (1.0)  #default value is 1
+                    self.iS.ScaleIntercept.append (0.0)    #default value is 0 
+        
+                    self.iS.FoVX.append(self.FoVX) 
+                    self.iS.FoVY.append(self.FoVY)
             return  self.iS 
         
       def paramSliderChange(self):
@@ -938,14 +1193,20 @@ class TNMRviewer(QMainWindow):
           
       def sliceSliderChange(self):
           self.sliceIndex=int(self.imv.currentIndex)         
-          
+       
+      def toggleHistogramLogMode(self): 
+          pass
+          # self.imv.getHistogramWidget().item.axis.setLogMode(True,False )
+          # self.imv.getHistogramWidget().item.vb.setLimits(yMin=1, yMax=16000)
+             
       def makeDaughter(self):
             self.daughter.show()
           
       def message(self,m):   
             self.statusBar.showMessage(m)
             self.messages+= '\n' + m
-
+            self.messageTextBox.info.setText(self.messages)
+      
       def showMessages(self):
           self.messageTextBox.show()
           self.messageTextBox.info.setText(self.messages)
@@ -1025,7 +1286,7 @@ if __name__ == '__main__':
     #clipboard=app.clipboard()
     #app.setStyleSheet("QWidget{font-size: 8pt;}") 
     tnmrViewerd = TNMRviewer()     #daughter windo in case need to view data in 2 windows
-    tnmrViewer = TNMRviewer(daughter=imageWindowd)
+    tnmrViewer = TNMRviewer(daughter=tnmrViewerd)
     tnmrViewer.show()
     sys.exit(app.exec_())
                 
